@@ -47,8 +47,8 @@ class CommentsTable extends AppTable
     }
 
     public function remove($comment)
-    {   
-        dd($comment);
-        $this->delete($comment);
+    { 
+        return $this->deleteAll(['id IN' => $comment]);
+
     }
 }

@@ -54,12 +54,12 @@ class ThreadsController extends AppController
         
         $CommentsTable = TableRegistry::getTableLocator()->get("comments");
         // dd($CommentsTable->getComment($id));
-        $request = $CommentsTable->getComment($id);
+        
         // $CommentsTable->remove($request);
-        if ($CommentsTable->remove($request)) {
+        if ($CommentsTable->remove($id)) {
             $this->Flash->success(__('削除しました'));
         } else {
-            $this->Flash->error(__('削除できませんでした.'));
+            $this->Flash->error(__('削除できませんでした'));
         }
         $this->redirect($this->referer(null, true));
     }

@@ -72,7 +72,7 @@ Router::scope('/', function (RouteBuilder $routes) {
 
     $routes->post('/threads/add/', ['controller' => 'Threads', 'action' => 'add']);
 
-    $routes->post('/threads/delete/', ['controller' => 'Threads', 'action' => 'delete']);
+    $routes->post('/threads/delete/*', ['controller' => 'Threads', 'action' => 'delete']);
 
     /*
      * Connect catchall routes for all controllers.

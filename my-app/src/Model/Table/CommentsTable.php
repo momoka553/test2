@@ -33,9 +33,22 @@ class CommentsTable extends AppTable
             ->all();
     }
 
+    public function getComment($id)
+    {
+        return $this->find()
+            ->where(['id' => $id])
+            ->first();
+    }
+
     public function register(array $data)
     {
         $entity = $this->newEntity($data);
         $this->save($entity);
+    }
+
+    public function remove($comment)
+    {   
+        dd($comment);
+        $this->delete($comment);
     }
 }

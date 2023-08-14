@@ -48,12 +48,15 @@ class ThreadsController extends AppController
     }
 
     public function delete($id = null){
-    if ($this->request->is('get')) {
-        throw new ForbiddenException('投稿の削除に失敗しました');
-    }
-    $request = $this->request->getData();
-    if ($CommentsTable->delete($request)) {
-        kill("ok");
+        if ($this->request->is('get')) {
+            throw new ForbiddenException('投稿の削除に失敗しました');
+        }
+        
+        $CommentsTable = TableRegistry::getTableLocator()->get("comments");
+        // dd($CommentsTable->getComment($id));
+        $request = $CommentsTable->getComment($id);
+        // $CommentsTable->remove($request);
+        if ($CommentsTable->remove($request)) {
             $this->Flash->success(__('削除しました'));
         } else {
             $this->Flash->error(__('削除できませんでした.'));

@@ -26,13 +26,21 @@ class ThreadsController extends AppController
      *   be found
      * @throws \Cake\View\Exception\MissingTemplateException In debug mode.
      */
+
+    public function initialize()
+    {
+        parent::initialize();
+        $this->CommentsTable = TableRegistry::getTableLocator()->get("comments");
+        $this->loadComponent('RequestHandler');
+
+    }
+
     public function index($id)
     {
         $ThredsTable = TableRegistry::getTableLocator()->get("threads");
-        $CommentsTable = TableRegistry::getTableLocator()->get("comments");
 
         $thread = $ThredsTable->getData($id);
-        $comments = $CommentsTable->getData($id);
+        $comments = $this->CommentsTable->getData($id);
         $this->set('thread', $thread);
         $this->set('comments', $comments);
 
@@ -41,8 +49,7 @@ class ThreadsController extends AppController
     public function add()
     {
         $request = $this->request->getData();
-        $CommentsTable = TableRegistry::getTableLocator()->get("comments");
-        $CommentsTable->register($request);
+        $this->CommentsTable->register($request);
 
         $this->redirect($this->referer(null, true));
     }
@@ -52,15 +59,22 @@ class ThreadsController extends AppController
             throw new ForbiddenException('削除できませんでした');
         }
         
-        $CommentsTable = TableRegistry::getTableLocator()->get("comments");
-        // dd($CommentsTable->getComment($id));
-        
-        // $CommentsTable->remove($request);
-        if ($CommentsTable->remove($id)) {
+
+        if ($this->CommentsTable->remove($id)) {
             $this->Flash->success(__('削除しました'));
         } else {
             $this->Flash->error(__('削除できませんでした'));
         }
+
         $this->redirect($this->referer(null, true));
+    }
+
+    public function addLike($id) {
+        return $this->response
+            ->withCharset('UTF-8')
+            ->withType('json')
+            ->withStringBody(json_encode(
+                $this->CommentsTable->registerLike($id)
+            ));
     }
 }

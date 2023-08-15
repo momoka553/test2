@@ -47,8 +47,18 @@ class CommentsTable extends AppTable
     }
 
     public function remove($comment)
-    { 
+    {
         return $this->deleteAll(['id IN' => $comment]);
 
+    }
+
+    public function registerLike($id)
+    {
+        $entity = $this->find()
+            ->where(['id' => $id])
+            ->first();
+        $entity->good += 1;
+        $this->save($entity);
+        return $entity->good;
     }
 }

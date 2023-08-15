@@ -51,6 +51,8 @@ Router::scope('/', function (RouteBuilder $routes) {
         'httpOnly' => true,
     ]));
 
+Router::extensions(['json', 'xml']);
+
     /*
      * Apply a middleware to the current route scope.
      * Requires middleware to be registered through `Application::routes()` with `registerMiddleware()`
@@ -74,6 +76,8 @@ Router::scope('/', function (RouteBuilder $routes) {
 
     $routes->post('/threads/delete/*', ['controller' => 'Threads', 'action' => 'delete']);
 
+    $routes->get('/threads/addlike/*', ['controller' => 'Threads', 'action' => 'addLike']);
+    
     /*
      * Connect catchall routes for all controllers.
      *

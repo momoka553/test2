@@ -1,4 +1,5 @@
 <h1><?= $thread->title ?></h1>
+
 <div style="width: 500px;display: block;margin: 0 auto;text-align: center;">
 <?= $this->Form->create(null, [
         'type' => 'post',
@@ -13,10 +14,17 @@
 
     <?= $this->Form->end() ?>
 </div>
+
+
+<?php $count = 1 ?>
 <?php foreach ($comments as $comment): ?>
-	<div><?= $comment->id ?></div>
+	<div><?= $count ?></div>
 	<div><?= $comment->getName() ?></div>
 	<div><?= $comment->comment ?></div>
+	<div>
+        <?= $this->Form->button('グッド', ['class' => 'addLike', 'type' => 'button', 'data-id' => $comment->id]) ?>
+        <span class="like"><?= $comment->good ?></span>
+    	</div>
 	<div><?= $comment->getModified() ?></div>
 		
         <?= $this->Form->postLink('削除',
@@ -24,8 +32,24 @@
 	        ['confirm' => __('本当に削除しますか？')]) 
 	    ?>
 	    
+<?php $count++ ?>
 <?php endforeach ?>
 
 <div class='footer'>
 	<a href="/">戻る</a>
 </div>
+
+<script type="text/javascript">
+
+$(".addLike").click(function(){
+    like_class = $(this).next();
+    id = $(this).data('id')
+    $.post({
+        dataType: "json",
+        type: "get",
+        url: `/threads/addlike/${id}`
+    }).done(function(response){
+        like_class.text(response);
+    })
+})
+</script>

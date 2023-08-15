@@ -49,7 +49,7 @@ class ThreadsController extends AppController
 
     public function delete($id = null){
         if ($this->request->is('get')) {
-            throw new ForbiddenException('投稿の削除に失敗しました');
+            throw new ForbiddenException('削除できませんでした');
         }
         
         $CommentsTable = TableRegistry::getTableLocator()->get("comments");

@@ -18,13 +18,14 @@
 	<div><?= $comment->getName() ?></div>
 	<div><?= $comment->comment ?></div>
 	<div><?= $comment->getModified() ?></div>
-		<?php /*
-        <?= $this->Form->postLink(__('削除'),
-	        ['action' => 'delete', $comment], 
-	        ['confirm' => __('本当に削除しますか？')]) 
-		*/ ?>
+		
         <?= $this->Form->postLink('削除',
 		    array('action'=>'delete', $comment->id),
 	        ['confirm' => __('本当に削除しますか？')]) 
 	    ?>
+	    
 <?php endforeach ?>
+
+<div class='footer'>
+	<a href="/">戻る</a>
+</div>

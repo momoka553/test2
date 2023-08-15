@@ -21,7 +21,7 @@
 	<div><?= $count ?></div>
 	<div><?= $comment->getName() ?></div>
 	<div><?= $comment->comment ?></div>
-	<div>
+	<div class="good-btn">
         <?= $this->Form->button('グッド', ['class' => 'addLike', 'type' => 'button', 'data-id' => $comment->id]) ?>
         <i class="fa-regular fa-thumbs-up"><span class="like"><?= $comment->good ?></span></i>
     	</div>

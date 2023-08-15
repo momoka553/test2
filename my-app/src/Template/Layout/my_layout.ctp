@@ -19,6 +19,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://kit.fontawesome.com/616bb16cf9.js" crossorigin="anonymous"></script>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
@@ -42,13 +43,14 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 <h1><a href="/">渋谷掲示板</a></h1>
             </li>
         </ul>
-        
     </nav>
     <?= $this->Flash->render() ?>
     <div class="container clearfix">
         <?= $this->fetch('content') ?>
     </div>
     <footer>
+        <hr width="100%">
+        <a href="/">戻る</a>
     </footer>
 </body>
 </html>

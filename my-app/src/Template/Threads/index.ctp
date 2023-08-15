@@ -23,7 +23,7 @@
 	<div><?= $comment->comment ?></div>
 	<div>
         <?= $this->Form->button('グッド', ['class' => 'addLike', 'type' => 'button', 'data-id' => $comment->id]) ?>
-        <span class="like"><?= $comment->good ?></span>
+        <i class="fa-regular fa-thumbs-up"><span class="like"><?= $comment->good ?></span></i>
     	</div>
 	<div><?= $comment->getModified() ?></div>
 		
@@ -34,10 +34,6 @@
 	    
 <?php $count++ ?>
 <?php endforeach ?>
-
-<div class='footer'>
-	<a href="/">戻る</a>
-</div>
 
 <script type="text/javascript">
 
